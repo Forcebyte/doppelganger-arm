@@ -48,9 +48,9 @@ ENV DOPPELGANGER_SKIP_PLAYWRIGHT_INSTALL=1 \
 RUN npm ci --omit=dev
 
 # Install Playwright browsers for ARM64
-# Note: WebKit is excluded as it has known issues on ARM64 Linux
-# Chromium and Firefox have full ARM64 support
-RUN npx playwright install --with-deps chromium chrome firefox
+# Note: WebKit and Chrome are excluded - they don't have ARM64 Linux builds
+# Only Chromium and Firefox are supported on ARM64 Linux
+RUN npx playwright install --with-deps chromium firefox
 
 # Copy server and built assets
 COPY --from=build /app/dist /app/dist
